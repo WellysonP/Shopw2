@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
       fontFamily: "Lato",
     );
     return ChangeNotifierProvider(
+      //modificação para utilizar provider
       create: (_) => ProductList(),
       child: MaterialApp(
         theme: theme.copyWith(
