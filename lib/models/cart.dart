@@ -1,8 +1,6 @@
 import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:shop2/models/product.dart';
-
 import 'cart_item.dart';
 
 class Cart with ChangeNotifier {
@@ -47,5 +45,13 @@ class Cart with ChangeNotifier {
 
   int get countItems {
     return _items.length;
+  }
+
+  double get totalAmount {
+    double total = 0.0;
+    _items.forEach((key, cartItem) {
+      total += cartItem.price * cartItem.quantity;
+    });
+    return total;
   }
 }
