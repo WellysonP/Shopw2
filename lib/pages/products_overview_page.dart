@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shop2/components/badge.dart';
+import 'package:shop2/models/cart.dart';
 import '../components/product_grid.dart';
 
 enum FilterOptions {
@@ -19,6 +22,16 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
       appBar: AppBar(
         title: Text("Lista de Produtos"),
         actions: [
+          Consumer<Cart>(
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.shopping_cart),
+            ),
+            builder: (ctx, cart, child) => Badge(
+              value: cart.countItems.toString(),
+              child: child!,
+            ),
+          ),
           PopupMenuButton(
             icon: Icon(Icons.more_horiz),
             itemBuilder: (_) => [
@@ -40,7 +53,7 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
                 }
               });
             },
-          )
+          ),
         ],
       ),
       body: ProductGrid(showfavoriteOnly: _showFavoriteOnly),
