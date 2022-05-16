@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/product.dart';
 import '../models/product_list.dart';
-import 'product_item.dart';
+import 'product_grid_item.dart';
 
 class ProductGrid extends StatelessWidget {
   final bool showfavoriteOnly;
@@ -28,7 +28,7 @@ class ProductGrid extends StatelessWidget {
         value: loadedProducts[index],
         // usando o provider.value pois a variavel já existe
         // se não existe deve ser usado o create
-        child: ProductItem(),
+        child: ProductGridItem(),
       ),
     );
   }
