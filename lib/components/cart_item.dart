@@ -47,7 +47,9 @@ class CartItemWidget extends StatelessWidget {
               child: FittedBox(
                 child: Text(
                   "${cartItem.price.toStringAsFixed(2)}",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color:
+                          Theme.of(context).primaryTextTheme.headline6?.color),
                 ),
               ),
             ),

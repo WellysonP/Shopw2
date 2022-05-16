@@ -12,12 +12,13 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text("Bem vindo"),
+            title: Text("Menu"),
+            automaticallyImplyLeading: false,
           ),
           Divider(),
           ListTile(
             leading: Icon(Icons.shop),
-            title: Text("Loja"),
+            title: Text("Lista de Produtos"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.HOME,
