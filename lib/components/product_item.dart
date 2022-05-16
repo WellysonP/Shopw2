@@ -9,6 +9,7 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
     final cart = Provider.of<Cart>(context, listen: false);
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: GridTile(
@@ -21,34 +22,45 @@ class ProductItem extends StatelessWidget {
           },
           child: Image.network(
             product.imageUrl,
-            fit: BoxFit.cover,
+            // fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
-          title: Text(
-            product.name,
-            textAlign: TextAlign.center,
+          title: Container(
+            // decoration: BoxDecoration(
+            //   border: Border.symmetric(
+            //     vertical:
+            //   ),
+            // ),
+            child: Text(
+              product.name,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  // fontSize: 10,
+                  ),
+            ),
           ),
-          backgroundColor: Colors.black87,
+          backgroundColor: Color.fromARGB(221, 27, 27, 27),
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
                 onPressed: () => product.toogleFavorite(),
                 icon: Icon(
                   product.isFavorite ? Icons.favorite : Icons.favorite_border,
                   color: Theme.of(context).colorScheme.secondary,
+                  // size: 20,
                 ),
-                alignment: Alignment.centerLeft),
+                alignment: Alignment.center),
           ),
           trailing: IconButton(
             onPressed: () {
               cart.addItem(product);
-              print(cart.totalAmount);
             },
             icon: Icon(
               Icons.shopping_cart,
               color: Theme.of(context).colorScheme.secondary,
+              // size: 20,
             ),
-            alignment: Alignment.centerRight,
+            alignment: Alignment.center,
           ),
         ),
       ),
