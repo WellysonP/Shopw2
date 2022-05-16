@@ -13,23 +13,8 @@ class ProductList with ChangeNotifier {
     _items.add(product);
     notifyListeners(); //provider notificador
   }
+
+  int get itemsCount {
+    return _items.length;
+  }
 }
-
-  // bool _showFavoriteOnly = false;
-
-  // void showFavoriteOnly() {
-  //   _showFavoriteOnly = true;
-  //   notifyListeners();
-  // }
-
-  // void showAll() {
-  //   _showFavoriteOnly = false;
-  //   notifyListeners();
-  // }
-
-  // List<Product> get items {
-  //   if (_showFavoriteOnly) {
-  //     return _items.where((element) => element.isFavorite).toList();
-  //   }
-  //   return [..._items];
-  // } 
