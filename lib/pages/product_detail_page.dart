@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shop2/models/cart_item.dart';
 import '../models/product.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -13,6 +14,38 @@ class ProductDetailPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(product.name),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                product.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+            SizedBox(height: 20),
+            Text(
+              "R\$ ${product.price.toStringAsFixed(2)}",
+              style: TextStyle(
+                fontSize: 20,
+                fontFamily: "Lato",
+                fontWeight: FontWeight.bold,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+            ),
+            SizedBox(height: 20),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              // width: double.infinity,
+              child: Text(product.description),
+            )
+          ],
+        ),
       ),
     );
   }
