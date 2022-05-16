@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop2/models/cart.dart';
 import 'package:shop2/models/order_list.dart';
 import 'package:shop2/models/product_list.dart';
+import 'package:shop2/pages/orders_page.dart';
 import 'package:shop2/pages/product_detail_page.dart';
 import 'package:shop2/utils/app_routes.dart';
 import './pages/products_overview_page.dart';
@@ -41,10 +42,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         debugShowCheckedModeBanner: false,
-        home: ProductsOverviewPage(),
+        // home: ProductsOverviewPage(),
         routes: {
+          AppRoutes.HOME: (context) => ProductsOverviewPage(),
           AppRoutes.PRODUCT_DETAIL: (context) => ProductDetailPage(),
           AppRoutes.CART: (context) => CartPage(),
+          AppRoutes.ORDERS: (context) => OrdersPages(),
         },
       ),
     );
