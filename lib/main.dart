@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/models/cart.dart';
+import 'package:shop2/models/order_list.dart';
 import 'package:shop2/models/product_list.dart';
 import 'package:shop2/pages/product_detail_page.dart';
 import 'package:shop2/utils/app_routes.dart';
@@ -27,6 +28,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (_) => Cart(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => OrderList(),
         ),
       ], //modificação para utilizar o MultiPovider
       child: MaterialApp(
