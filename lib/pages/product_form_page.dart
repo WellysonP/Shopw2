@@ -26,6 +26,26 @@ class _ProductFormPageState extends State<ProductFormPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    if (_formData.isEmpty) {
+      final arg = ModalRoute.of(context)?.settings.arguments;
+
+      if (arg != null) {
+        final product = arg as Product;
+        _formData["id"] = product.id;
+        _formData["name"] = product.name;
+        _formData["price"] = product.price;
+        _formData["description"] = product.description;
+        _formData["imageUrl"] = product.imageUrl;
+
+        _urlControler.text = product.imageUrl;
+      }
+    }
+  }
+
+  @override
   void dispose() {
     super.dispose();
     _priceFocurs.dispose();
@@ -54,14 +74,8 @@ class _ProductFormPageState extends State<ProductFormPage> {
     }
     _formKey.currentState?.save();
 
-    final newProduct = Product(
-      id: Random().nextDouble().toString(),
-      name: _formData["name"] as String,
-      description: _formData["description"] as String,
-      price: _formData["price"] as double,
-      imageUrl: _formData["imageUrl"] as String,
-    );
-    Provider.of<ProductList>(context, listen: false).addProduct(newProduct);
+    Provider.of<ProductList>(context, listen: false).saveProduct(_formData);
+    Navigator.of(context).pop();
   }
 
   @override
@@ -83,6 +97,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
           child: ListView(
             children: [
               TextFormField(
+                initialValue: _formData["name"]?.toString(),
                 decoration: InputDecoration(labelText: "Nome"),
                 textInputAction: TextInputAction.next,
                 onFieldSubmitted: (_) {
@@ -102,6 +117,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 },
               ),
               TextFormField(
+                initialValue: _formData["price"]?.toString(),
                 decoration: InputDecoration(labelText: "Preço"),
                 textInputAction: TextInputAction.next,
                 focusNode: _priceFocurs,
@@ -129,6 +145,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                 },
               ),
               TextFormField(
+                initialValue: _formData["description"]?.toString(),
                 decoration: InputDecoration(labelText: "Descrição"),
                 focusNode: _descriptionFocus,
                 keyboardType: TextInputType.multiline,
