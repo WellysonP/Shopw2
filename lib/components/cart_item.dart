@@ -15,14 +15,14 @@ class CartItemWidget extends StatelessWidget {
       direction: DismissDirection.endToStart,
       background: Container(
         color: Theme.of(context).errorColor,
-        child: Icon(
+        child: const Icon(
           Icons.delete,
           color: Colors.white,
           size: 40,
         ),
         alignment: Alignment.centerRight,
-        padding: EdgeInsets.only(right: 20),
-        margin: EdgeInsets.symmetric(
+        padding: const EdgeInsets.only(right: 20),
+        margin: const EdgeInsets.symmetric(
           vertical: 4,
           horizontal: 15,
         ),
@@ -31,20 +31,20 @@ class CartItemWidget extends StatelessWidget {
         return showDialog<bool>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: Text("EXCLUIR"),
-            content: Text("Deseja excluir o item do carrinho?"),
+            title: const Text("EXCLUIR"),
+            content: const Text("Deseja excluir o item do carrinho?"),
             actions: [
               TextButton(
                 onPressed: () {
                   Navigator.of(ctx).pop(true);
                 },
-                child: Text("Sim"),
+                child: const Text("Sim"),
               ),
               TextButton(
                 onPressed: () {
                   Navigator.of(ctx).pop(false);
                 },
-                child: Text("Não"),
+                child: const Text("Não"),
               ),
             ],
           ),
@@ -69,7 +69,7 @@ class CartItemWidget extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               child: FittedBox(
                 child: Text(
-                  "${cartItem.price.toStringAsFixed(2)}",
+                  cartItem.price.toStringAsFixed(2),
                   style: TextStyle(
                       color:
                           Theme.of(context).primaryTextTheme.headline6?.color),

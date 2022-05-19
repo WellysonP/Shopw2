@@ -44,10 +44,6 @@ class ProductItem extends StatelessWidget {
                     actions: [
                       TextButton(
                         onPressed: () {
-                          Provider.of<ProductList>(
-                            context,
-                            listen: false,
-                          ).removeProduct(product);
                           Navigator.of(ctx).pop(true);
                         },
                         child: Text("Sim"),
@@ -60,7 +56,14 @@ class ProductItem extends StatelessWidget {
                       ),
                     ],
                   ),
-                );
+                ).then((value) {
+                  if (value ?? false) {
+                    Provider.of<ProductList>(
+                      context,
+                      listen: false,
+                    ).removeProduct(product);
+                  }
+                });
               },
               icon: Icon(
                 Icons.delete,

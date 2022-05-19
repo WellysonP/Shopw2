@@ -5,6 +5,8 @@ import 'package:shop2/utils/app_routes.dart';
 import '../models/product.dart';
 
 class ProductGridItem extends StatelessWidget {
+  const ProductGridItem({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context, listen: false);
@@ -22,25 +24,14 @@ class ProductGridItem extends StatelessWidget {
           },
           child: Image.network(
             product.imageUrl,
-            // fit: BoxFit.cover,
           ),
         ),
         footer: GridTileBar(
-          title: Container(
-            // decoration: BoxDecoration(
-            //   border: Border.symmetric(
-            //     vertical:
-            //   ),
-            // ),
-            child: Text(
-              product.name,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  // fontSize: 10,
-                  ),
-            ),
+          title: Text(
+            product.name,
+            textAlign: TextAlign.center,
           ),
-          backgroundColor: Color.fromARGB(221, 27, 27, 27),
+          backgroundColor: const Color.fromARGB(221, 27, 27, 27),
           leading: Consumer<Product>(
             builder: (ctx, product, _) => IconButton(
                 onPressed: () => product.toogleFavorite(),
@@ -56,8 +47,8 @@ class ProductGridItem extends StatelessWidget {
               ScaffoldMessenger.of(context).hideCurrentSnackBar();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text("Produto adicionado com sucesso"),
-                  duration: Duration(seconds: 2),
+                  content: const Text("Produto adicionado com sucesso"),
+                  duration: const Duration(seconds: 2),
                   action: SnackBarAction(
                     label: "DESFAZER",
                     onPressed: () {

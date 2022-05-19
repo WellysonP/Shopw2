@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:shop2/utils/app_routes.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -12,33 +10,33 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: [
           AppBar(
-            title: Text("Menu"),
+            title: const Text("Menu"),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.shop),
-            title: Text("Lista de Produtos"),
+            leading: const Icon(Icons.shop),
+            title: const Text("Lista de Produtos"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.HOME,
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.payment),
-            title: Text("Pedidos"),
+            leading: const Icon(Icons.payment),
+            title: const Text("Pedidos"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.ORDERS,
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.edit),
-            title: Text("Gerenciar Produtos"),
+            leading: const Icon(Icons.edit),
+            title: const Text("Gerenciar Produtos"),
             onTap: () {
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.PRODUCTS,

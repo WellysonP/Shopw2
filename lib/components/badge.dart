@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Badge extends StatelessWidget {
@@ -22,19 +21,19 @@ class Badge extends StatelessWidget {
           right: 8,
           top: 8,
           child: Container(
-            padding: EdgeInsets.all(2),
+            padding: const EdgeInsets.all(2),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
               color: color ?? Theme.of(context).colorScheme.secondary,
             ),
-            constraints: BoxConstraints(
+            constraints: const BoxConstraints(
               minHeight: 15,
               minWidth: 15,
             ),
             child: Text(
               value,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 10),
+              style: const TextStyle(fontSize: 10),
             ),
           ),
         )
