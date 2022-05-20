@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shop2/models/cart_item.dart';
 import '../models/product.dart';
 
 class ProductDetailPage extends StatelessWidget {
@@ -41,7 +40,6 @@ class ProductDetailPage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(
                 horizontal: 10,
               ),
-              // width: double.infinity,
               child: Text(product.description),
             )
           ],

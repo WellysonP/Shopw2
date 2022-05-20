@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/components/app_drawer.dart';
 import 'package:shop2/models/product_list.dart';
-import 'package:shop2/pages/product_form_page.dart';
 import 'package:shop2/utils/app_routes.dart';
-
 import '../components/product_item.dart';
 
 class ProductsPage extends StatelessWidget {
   const ProductsPage({Key? key}) : super(key: key);
+
+  Future<void> _refreshProducts(BuildContext context) {
+    return Provider.of<ProductList>(context, listen: false).loadProdcts();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +28,18 @@ class ProductsPage extends StatelessWidget {
         title: Text("Gerenciar Produtos"),
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: products.itemsCount,
-          itemBuilder: (ctx, index) => Column(
-            children: [
-              ProductItem(product: products.items[index]),
-              Divider(),
-            ],
+      body: RefreshIndicator(
+        onRefresh: () => _refreshProducts(context),
+        child: Padding(
+          padding: EdgeInsets.all(8),
+          child: ListView.builder(
+            itemCount: products.itemsCount,
+            itemBuilder: (ctx, index) => Column(
+              children: [
+                ProductItem(product: products.items[index]),
+                Divider(),
+              ],
+            ),
           ),
         ),
       ),

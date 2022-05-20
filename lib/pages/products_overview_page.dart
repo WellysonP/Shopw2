@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:shop2/components/app_drawer.dart';
 import 'package:shop2/components/badge.dart';
 import 'package:shop2/models/cart.dart';
+import 'package:shop2/models/product_list.dart';
 import '../components/product_grid.dart';
 import '../utils/app_routes.dart';
 
@@ -18,6 +19,25 @@ class ProductsOverviewPage extends StatefulWidget {
 
 class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
   bool _showFavoriteOnly = false;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<ProductList>(
+      context,
+      listen: false,
+    ).loadProdcts().then((value) {
+      setState(() {
+        _isLoading = false;
+      });
+    });
+  }
+
+  Future<void> _refreshProducts(BuildContext context) {
+    return Provider.of<ProductList>(context, listen: false).loadProdcts();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,7 +80,14 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
           ),
         ],
       ),
-      body: ProductGrid(showfavoriteOnly: _showFavoriteOnly),
+      body: _isLoading
+          ? RefreshIndicator(
+              onRefresh: () => _refreshProducts(context),
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            )
+          : ProductGrid(showfavoriteOnly: _showFavoriteOnly),
       drawer: AppDrawer(),
     );
   }
