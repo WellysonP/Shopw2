@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop2/models/auth.dart';
 import 'package:shop2/models/cart.dart';
 import 'package:shop2/models/order_list.dart';
 import 'package:shop2/models/product_list.dart';
+import 'package:shop2/pages/auth_or_home_page.dart';
+import 'package:shop2/pages/auth_page.dart';
 import 'package:shop2/pages/orders_page.dart';
 import 'package:shop2/pages/product_detail_page.dart';
 import 'package:shop2/pages/products_page.dart';
@@ -35,6 +38,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => OrderList(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => Auth(),
+        ),
       ], //modificação para utilizar o MultiPovider
       child: MaterialApp(
         theme: theme.copyWith(
@@ -42,11 +48,15 @@ class MyApp extends StatelessWidget {
             primary: Colors.purple,
             secondary: Colors.deepOrange,
           ),
+          textTheme: theme.textTheme.copyWith(
+            headline6: TextStyle(
+              color: Colors.white,
+            ),
+          ),
         ),
         debugShowCheckedModeBanner: false,
-        // home: ProductsOverviewPage(),
         routes: {
-          AppRoutes.HOME: (context) => ProductsOverviewPage(),
+          AppRoutes.AUTH_OR_HOME: (context) => AuthOrHomePage(),
           AppRoutes.PRODUCT_DETAIL: (context) => ProductDetailPage(),
           AppRoutes.CART: (context) => CartPage(),
           AppRoutes.ORDERS: (context) => OrdersPages(),
