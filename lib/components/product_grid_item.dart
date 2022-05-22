@@ -40,7 +40,10 @@ class ProductGridItem extends StatelessWidget {
             builder: (ctx, product, _) => IconButton(
                 onPressed: () async {
                   try {
-                    await product.toogleFavorite(auth.token ?? "");
+                    await product.toogleFavorite(
+                      auth.token ?? "",
+                      auth.userId ?? "",
+                    );
                   } on HttpException catch (error) {
                     msg.showSnackBar(
                       SnackBar(
