@@ -17,6 +17,7 @@ class Cart with ChangeNotifier {
           name: existingItem.name,
           quantity: existingItem.quantity + 1,
           price: existingItem.price,
+          imageUrl: existingItem.imageUrl,
         ),
       );
     } else {
@@ -27,7 +28,8 @@ class Cart with ChangeNotifier {
             productId: product.id,
             name: product.name,
             quantity: 1,
-            price: product.price),
+            price: product.price,
+            imageUrl: product.imageUrl),
       );
     }
     notifyListeners();
@@ -54,6 +56,7 @@ class Cart with ChangeNotifier {
           name: existingItem.name,
           quantity: existingItem.quantity - 1,
           price: existingItem.price,
+          imageUrl: existingItem.imageUrl,
         ),
       );
     }

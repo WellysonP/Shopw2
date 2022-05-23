@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:provider/provider.dart';
+import 'package:shop2/models/order_list.dart';
 import '../models/order.dart';
 
 class OrderWidget extends StatefulWidget {
@@ -15,6 +16,7 @@ class _OrderWidgetState extends State<OrderWidget> {
   bool _expanded = false;
   @override
   Widget build(BuildContext context) {
+    final cart = Provider.of<OrderList>(context);
     return Card(
       elevation: 4,
       child: Column(
@@ -33,31 +35,28 @@ class _OrderWidgetState extends State<OrderWidget> {
           if (_expanded)
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: (widget.order.products.length * 25) + 10,
-              child: ListView(
-                children: widget.order.products.map(
-                  (product) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          product.name,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Text(
-                          "${product.quantity}x R\$ ${product.price.toStringAsFixed(2)}",
-                          style: const TextStyle(
-                            fontSize: 15,
-                            color: Colors.grey,
-                          ),
-                        )
-                      ],
-                    );
-                  },
-                ).toList(),
+              height: (widget.order.products.length * 55) + 10,
+              child: ListView.builder(
+                itemCount: widget.order.products.length,
+                itemBuilder: (ctx, i) => ListTile(
+                  leading: CircleAvatar(
+                      backgroundImage: NetworkImage(
+                          widget.order.products.elementAt(i).imageUrl)),
+                  title: Text(
+                    widget.order.products.elementAt(i).name,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  trailing: Text(
+                    "${widget.order.products.elementAt(i).quantity}x R\$ ${widget.order.products.elementAt(i).price.toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 15,
+                      color: Colors.grey,
+                    ),
+                  ),
+                ),
               ),
             ),
         ],

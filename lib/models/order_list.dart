@@ -33,6 +33,7 @@ class OrderList with ChangeNotifier {
           "name": cartItem.name,
           "quantity": cartItem.quantity,
           "price": cartItem.price,
+          "imageUrl": cartItem.imageUrl
         });
     final response = await http.post(
       Uri.parse("${Constants.ORDERS_BASE_URL}/$_userId.json?auth=$_token"),
@@ -49,11 +50,11 @@ class OrderList with ChangeNotifier {
     _items.insert(
       0,
       Order(
-        id: id,
-        total: cart.totalAmount,
-        products: cart.items.values.toList(),
-        date: date,
-      ),
+          id: id,
+          total: cart.totalAmount,
+          products: cart.items.values.toList(),
+          date: date,
+          imageUrl: cart.items.values.toString()),
     );
     notifyListeners();
   }
@@ -79,8 +80,10 @@ class OrderList with ChangeNotifier {
               name: item["name"],
               quantity: item["quantity"],
               price: item["price"],
+              imageUrl: item["imageUrl"],
             );
           }).toList(),
+          imageUrl: orderData["imageUrl"],
         ),
       );
     });
