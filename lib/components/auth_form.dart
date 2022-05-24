@@ -1,12 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/exceptions/auth_exception.dart';
 import 'package:shop2/models/auth.dart';
 
-enum AuthMode { SignUp, Login }
+enum AuthMode { signUp, login }
 
 class AuthForm extends StatefulWidget {
   const AuthForm({Key? key}) : super(key: key);
@@ -19,14 +16,15 @@ class _AuthFormState extends State<AuthForm> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool _isLoading = false;
-  AuthMode _authMode = AuthMode.Login;
+  AuthMode _authMode = AuthMode.login;
+  // ignore: prefer_final_fields
   Map<String, String> _authData = {
     "email": "",
     "password": "",
   };
 
-  bool _isLogin() => _authMode == AuthMode.Login;
-  bool _isSignUp() => _authMode == AuthMode.SignUp;
+  bool _isLogin() => _authMode == AuthMode.login;
+  bool _isSignUp() => _authMode == AuthMode.signUp;
 
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -65,9 +63,9 @@ class _AuthFormState extends State<AuthForm> {
 
   void _switchAuthMode() {
     setState(() {
-      _authMode == AuthMode.Login
-          ? _authMode = AuthMode.SignUp
-          : _authMode = AuthMode.Login;
+      _authMode == AuthMode.login
+          ? _authMode = AuthMode.signUp
+          : _authMode = AuthMode.login;
     });
   }
 
@@ -75,12 +73,12 @@ class _AuthFormState extends State<AuthForm> {
     showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
-              title: Text("Ocorreu um erro"),
+              title: const Text("Ocorreu um erro"),
               content: Text(msg),
               actions: [
                 TextButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    child: Text("Fechar")),
+                    child: const Text("Fechar")),
               ],
             ));
   }
@@ -94,7 +92,7 @@ class _AuthFormState extends State<AuthForm> {
         borderRadius: BorderRadius.circular(15),
       ),
       child: Container(
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         height: _isLogin() ? 310 : 400,
         width: deviceSize.width * 0.75,
         child: Form(
@@ -102,7 +100,7 @@ class _AuthFormState extends State<AuthForm> {
           child: Column(
             children: [
               TextFormField(
-                decoration: InputDecoration(labelText: "E-mail"),
+                decoration: const InputDecoration(labelText: "E-mail"),
                 keyboardType: TextInputType.emailAddress,
                 onSaved: (email) => _authData["email"] = email ?? "",
                 validator: (_email) {
@@ -114,7 +112,7 @@ class _AuthFormState extends State<AuthForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: "Senha"),
+                decoration: const InputDecoration(labelText: "Senha"),
                 keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 onSaved: (password) => _authData["password"] = password ?? "",
@@ -143,9 +141,9 @@ class _AuthFormState extends State<AuthForm> {
                           return null;
                         },
                 ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               if (_isLoading)
-                CircularProgressIndicator()
+                const CircularProgressIndicator()
               else
                 ElevatedButton(
                   onPressed: _submit,
@@ -156,12 +154,12 @@ class _AuthFormState extends State<AuthForm> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                         horizontal: 30,
                         vertical: 8,
                       )),
                 ),
-              Spacer(),
+              const Spacer(),
               TextButton(
                 onPressed: _switchAuthMode,
                 child: Text(_isLogin() ? "CADASTRAR E-MAIL" : "EFETUAR LOGIN"),

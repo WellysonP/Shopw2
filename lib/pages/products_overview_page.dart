@@ -42,7 +42,9 @@ class _ProductsOverviewPageState extends State<ProductsOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Lista de Produtos"),
+        title: Text(
+          "Lista de Produtos",
+        ),
         actions: [
           Consumer<Cart>(
             child: IconButton(

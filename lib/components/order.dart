@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:shop2/models/order_list.dart';
 import '../models/order.dart';
 
 class OrderWidget extends StatefulWidget {
@@ -16,13 +14,14 @@ class _OrderWidgetState extends State<OrderWidget> {
   bool _expanded = false;
   @override
   Widget build(BuildContext context) {
-    final cart = Provider.of<OrderList>(context);
     return Card(
       elevation: 4,
       child: Column(
         children: [
           ListTile(
-            title: Text("R\$ ${widget.order.total.toStringAsFixed(2)}"),
+            title: Text("R\$ " +
+                NumberFormat.currency(locale: "pt", customPattern: "#,###.#")
+                    .format(widget.order.total)),
             subtitle:
                 Text(DateFormat("dd/MM/yy hh:mm").format(widget.order.date)),
             trailing: const Icon(Icons.expand_more),
@@ -50,7 +49,10 @@ class _OrderWidgetState extends State<OrderWidget> {
                     ),
                   ),
                   trailing: Text(
-                    "${widget.order.products.elementAt(i).quantity}x R\$ ${widget.order.products.elementAt(i).price.toStringAsFixed(2)}",
+                    "${widget.order.products.elementAt(i).quantity}x R\$ " +
+                        NumberFormat.currency(
+                                locale: "pt", customPattern: "#,###.#")
+                            .format(widget.order.products.elementAt(i).price),
                     style: const TextStyle(
                       fontSize: 15,
                       color: Colors.grey,

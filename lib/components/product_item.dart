@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:shop2/exceptions/http_exceptions.dart';
 import 'package:shop2/models/product.dart';
 import 'package:shop2/models/product_list.dart';
-
 import '../utils/app_routes.dart';
 
 class ProductItem extends StatelessWidget {
@@ -21,7 +20,7 @@ class ProductItem extends StatelessWidget {
         backgroundImage: NetworkImage(product.imageUrl),
       ),
       title: Text(product.name),
-      trailing: Container(
+      trailing: SizedBox(
         width: 100,
         child: Row(
           children: [
@@ -40,21 +39,21 @@ class ProductItem extends StatelessWidget {
                 showDialog<bool>(
                   context: context,
                   builder: (ctx) => AlertDialog(
-                    title: Text("EXCLUIR"),
-                    content:
-                        Text("Deseja excluir o item da lista de produtos?"),
+                    title: const Text("EXCLUIR"),
+                    content: const Text(
+                        "Deseja excluir o item da lista de produtos?"),
                     actions: [
                       TextButton(
                         onPressed: () {
                           Navigator.of(ctx).pop(true);
                         },
-                        child: Text("Sim"),
+                        child: const Text("Sim"),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.of(ctx).pop(false);
                         },
-                        child: Text("Não"),
+                        child: const Text("Não"),
                       ),
                     ],
                   ),

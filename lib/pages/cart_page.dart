@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/models/order_list.dart';
 import '../models/cart.dart';
@@ -38,7 +39,10 @@ class CartPage extends StatelessWidget {
                   Chip(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     label: Text(
-                      "R\$ ${cart.totalAmount.toStringAsFixed(2)}",
+                      "R\$ " +
+                          NumberFormat.currency(
+                                  locale: "pt", customPattern: "#,###.#")
+                              .format(cart.totalAmount),
                       style: TextStyle(
                         color:
                             Theme.of(context).primaryTextTheme.headline6?.color,
@@ -94,7 +98,13 @@ class _CartButtonState extends State<CartButton> {
                     widget.cart.clearCart();
                     setState(() => _isLoading = false);
                   },
-            child: Text("COMPRAR"),
+            child: Text(
+              "COMPRAR",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
           );
   }
 }
