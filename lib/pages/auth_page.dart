@@ -22,44 +22,49 @@ class AuthPage extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            width: double.infinity,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                    bottom: 20,
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 5,
-                  ),
-                  //cascade operator
-                  transform: Matrix4.rotationZ(-8 * pi / 180)..translate(-5.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: Colors.deepOrange.shade900,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 8,
-                        color: Colors.black54,
-                        offset: Offset(0, 2),
+          Center(
+            child: SingleChildScrollView(
+              child: Container(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                        bottom: 20,
                       ),
-                    ],
-                  ),
-                  child: Text(
-                    "Perfumaria Pontes",
-                    style: TextStyle(
-                      fontFamily: "Anton",
-                      fontSize: 45,
-                      color: Theme.of(context).textTheme.headline6?.color,
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 5,
+                      ),
+                      //cascade operator
+                      transform: Matrix4.rotationZ(-8 * pi / 180)
+                        ..translate(-5.0),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.deepOrange.shade900,
+                        boxShadow: [
+                          BoxShadow(
+                            blurRadius: 8,
+                            color: Colors.black54,
+                            offset: Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        "Perfumaria Pontes",
+                        style: TextStyle(
+                          fontFamily: "Anton",
+                          fontSize: 45,
+                          color: Theme.of(context).textTheme.headline6?.color,
+                        ),
+                      ),
                     ),
-                  ),
+                    AuthForm(),
+                  ],
                 ),
-                AuthForm(),
-              ],
+              ),
             ),
           ),
         ],

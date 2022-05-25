@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/exceptions/auth_exception.dart';
@@ -25,7 +27,8 @@ class _AuthFormState extends State<AuthForm>
   };
 
   AnimationController? _controller;
-  Animation<Size>? _heightAnimation;
+  Animation<double>? _opacityAnimation;
+  Animation<Offset>? _slideAnimation;
 
   @override
   void initState() {
@@ -37,9 +40,18 @@ class _AuthFormState extends State<AuthForm>
       ),
     );
 
-    _heightAnimation = Tween(
-      begin: Size(double.infinity, 300),
-      end: Size(double.infinity, 370),
+    _opacityAnimation = Tween(
+      begin: 0.0,
+      end: 1.0,
+    ).animate(
+      CurvedAnimation(
+        parent: _controller!,
+        curve: Curves.linear,
+      ),
+    );
+    _slideAnimation = Tween<Offset>(
+      begin: Offset(0, -1.5),
+      end: Offset(0, 0),
     ).animate(
       CurvedAnimation(
         parent: _controller!,
@@ -56,7 +68,7 @@ class _AuthFormState extends State<AuthForm>
   }
 
   bool _isLogin() => _authMode == AuthMode.login;
-  bool _isSignUp() => _authMode == AuthMode.signUp;
+  // bool _isSignUp() => _authMode == AuthMode.signUp;
 
   Future<void> _submit() async {
     final isValid = _formKey.currentState?.validate() ?? false;
@@ -164,22 +176,35 @@ class _AuthFormState extends State<AuthForm>
                   return null;
                 },
               ),
-              if (_isSignUp())
-                TextFormField(
-                  decoration:
-                      const InputDecoration(labelText: "Confirmar Senha"),
-                  keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  validator: _isLogin()
-                      ? null
-                      : (_password) {
-                          final password = _password ?? "";
-                          if (password != _passwordController.text) {
-                            return 'Senhas informadas não conferem.';
-                          }
-                          return null;
-                        },
+              AnimatedContainer(
+                constraints: BoxConstraints(
+                  minHeight: _isLogin() ? 0 : 60,
+                  maxHeight: _isLogin() ? 0 : 120,
                 ),
+                duration: Duration(milliseconds: 300),
+                curve: Curves.linear,
+                child: FadeTransition(
+                  opacity: _opacityAnimation!,
+                  child: SlideTransition(
+                    position: _slideAnimation!,
+                    child: TextFormField(
+                      decoration:
+                          const InputDecoration(labelText: "Confirmar Senha"),
+                      keyboardType: TextInputType.visiblePassword,
+                      obscureText: true,
+                      validator: _isLogin()
+                          ? null
+                          : (_password) {
+                              final password = _password ?? "";
+                              if (password != _passwordController.text) {
+                                return 'Senhas informadas não conferem.';
+                              }
+                              return null;
+                            },
+                    ),
+                  ),
+                ),
+              ),
               const SizedBox(height: 20),
               if (_isLoading)
                 const CircularProgressIndicator()
