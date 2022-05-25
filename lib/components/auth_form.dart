@@ -127,15 +127,13 @@ class _AuthFormState extends State<AuthForm>
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15),
       ),
-      child: AnimatedBuilder(
-        animation: _heightAnimation!,
-        builder: (ctx, childForm) => Container(
-          padding: const EdgeInsets.all(10),
-          // height: _isLogin() ? 310 : 400,
-          height: _heightAnimation?.value.height ?? (_isLogin() ? 300 : 370),
-          width: deviceSize.width * 0.75,
-          child: childForm,
-        ),
+      child: AnimatedContainer(
+        duration: Duration(milliseconds: 300),
+        curve: Curves.linear,
+        padding: const EdgeInsets.all(10),
+        height: _isLogin() ? 310 : 400,
+        // height: _heightAnimation?.value.height ?? (_isLogin() ? 300 : 370),
+        width: deviceSize.width * 0.75,
         child: Form(
           key: _formKey,
           child: Column(
