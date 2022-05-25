@@ -14,27 +14,32 @@ class _OrderWidgetState extends State<OrderWidget> {
   bool _expanded = false;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 4,
-      child: Column(
-        children: [
-          ListTile(
-            title: Text("R\$ " +
-                NumberFormat.currency(locale: "pt", customPattern: "#,###.#")
-                    .format(widget.order.total)),
-            subtitle:
-                Text(DateFormat("dd/MM/yy hh:mm").format(widget.order.date)),
-            trailing: const Icon(Icons.expand_more),
-            onTap: () {
-              setState(() {
-                _expanded = !_expanded;
-              });
-            },
-          ),
-          if (_expanded)
-            Container(
+    final double _itemsHeight = (widget.order.products.length * 55) + 10;
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      height: _expanded ? _itemsHeight + 82 : 82,
+      child: Card(
+        elevation: 4,
+        child: Column(
+          children: [
+            ListTile(
+              title: Text("R\$ " +
+                  NumberFormat.currency(locale: "pt", customPattern: "#,###.#")
+                      .format(widget.order.total)),
+              subtitle:
+                  Text(DateFormat("dd/MM/yy hh:mm").format(widget.order.date)),
+              trailing: const Icon(Icons.expand_more),
+              onTap: () {
+                setState(() {
+                  _expanded = !_expanded;
+                });
+              },
+            ),
+            AnimatedContainer(
+              duration: Duration(milliseconds: 300),
+              height: _expanded ? _itemsHeight : 0,
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 4),
-              height: (widget.order.products.length * 55) + 10,
+              // height: _itemsHeight,
               child: ListView.builder(
                 itemCount: widget.order.products.length,
                 itemBuilder: (ctx, i) => ListTile(
@@ -61,7 +66,8 @@ class _OrderWidgetState extends State<OrderWidget> {
                 ),
               ),
             ),
-        ],
+          ],
+        ),
       ),
     );
   }
