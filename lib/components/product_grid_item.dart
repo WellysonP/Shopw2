@@ -32,9 +32,6 @@ class ProductGridItem extends StatelessWidget {
               image: NetworkImage(product.imageUrl),
             ),
           ),
-          // child: Image.network(
-          //   product.imageUrl,
-          // ),
         ),
         footer: Container(
           height: 50,

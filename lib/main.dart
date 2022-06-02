@@ -1,7 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/components/is_dark_theme.dart';
+import 'package:shop2/firebase_options.dart';
 import 'package:shop2/models/auth.dart';
 import 'package:shop2/models/cart.dart';
 import 'package:shop2/models/order_list.dart';
@@ -14,11 +18,19 @@ import 'package:shop2/utils/app_routes.dart';
 import './pages/cart_page.dart';
 import './pages/product_form_page.dart';
 
-void main() {
-  runApp(ChangeNotifierProvider(
-    create: (_) => IsADarkTheme(),
-    child: const MyApp(),
-  ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(const MyApp());
+  FirebaseFirestore.instance
+      .collection("Pedidos")
+      .doc("01")
+      .snapshots()
+      .listen((document) {
+    print(document["usuário"]);
+  });
 }
 
 class MyApp extends StatelessWidget {

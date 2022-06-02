@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1005403212069",
+    "firebase_url": "https://perfumariapontes-77985-default-rtdb.firebaseio.com",
+    "project_id": "perfumariapontes-77985",
+    "storage_bucket": "perfumariapontes-77985.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1005403212069:android:5a8ebc51c3b6aeb8d5f2cc",
+        "android_client_info": {
+          "package_name": "br.com.wellysonpontes.shop2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1005403212069-ifci93g2lvc6koo0e1r6qtk8juesmgg0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0RnZhE3yrl_J2MspWGggAQj2VqOgTMhM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1005403212069-ifci93g2lvc6koo0e1r6qtk8juesmgg0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1005403212069-2727tt3tcuo9sfjc5429678tgij7sq32.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "br.com.wellysonpontes.shop2"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

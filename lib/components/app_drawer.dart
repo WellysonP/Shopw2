@@ -2,12 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shop2/components/is_dark_theme.dart';
 import 'package:shop2/utils/app_routes.dart';
-import 'package:shop2/utils/custom_routs.dart';
-import '../main.dart';
 import '../models/auth.dart';
-import '../pages/auth_or_home_page.dart';
-import '../pages/orders_page.dart';
-import '../pages/products_page.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -27,8 +22,6 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.shop),
             title: const Text("Lista de Produtos"),
             onTap: () {
-              // Navigator.of(context).pushReplacement(
-              //   CustomRoute(builder: (ctx) => AuthOrHomePage()),
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.AUTH_OR_HOME,
               );
@@ -39,8 +32,6 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.payment),
             title: const Text("Pedidos"),
             onTap: () {
-              // Navigator.of(context).pushReplacement(
-              //   CustomRoute(builder: (ctx) => OrdersPages()),
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.ORDERS,
               );
@@ -51,8 +42,6 @@ class AppDrawer extends StatelessWidget {
             leading: const Icon(Icons.edit),
             title: const Text("Gerenciar Produtos"),
             onTap: () {
-              // Navigator.of(context).pushReplacement(
-              //   CustomRoute(builder: (ctx) => ProductsPage()),
               Navigator.of(context).pushReplacementNamed(
                 AppRoutes.PRODUCTS,
               );

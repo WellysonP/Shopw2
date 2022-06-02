@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shop2/components/validator.dart';
 import 'package:shop2/exceptions/auth_exception.dart';
 import 'package:shop2/models/auth.dart';
 
@@ -153,18 +154,23 @@ class _AuthFormState extends State<AuthForm>
               TextFormField(
                 decoration: const InputDecoration(labelText: "E-mail"),
                 keyboardType: TextInputType.emailAddress,
+                autocorrect: false,
                 onSaved: (email) => _authData["email"] = email ?? "",
                 validator: (_email) {
                   final email = _email ?? "";
-                  if (email.trim().isEmpty || !email.contains("@")) {
+                  if (!emailValid(email)) {
                     return "Informar endereço de e-mail válido.";
                   }
+                  // if (email.trim().isEmpty || !email.contains("@")) {
+                  //   return "Informar endereço de e-mail válido.";
+                  // }
                   return null;
                 },
               ),
               TextFormField(
                 decoration: const InputDecoration(labelText: "Senha"),
                 keyboardType: TextInputType.visiblePassword,
+                autocorrect: false,
                 obscureText: true,
                 onSaved: (password) => _authData["password"] = password ?? "",
                 controller: _passwordController,
